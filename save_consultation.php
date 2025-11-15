@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Untuk testing, hardcode user_id = 1
     // Dalam implementasi nyata, gunakan session user_id
-    $userId;
+    $userId = 1;
     
     if ($userId) {
         try {
