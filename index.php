@@ -168,7 +168,7 @@
             
             
             <div class="hero-image">
-                    <img src="assets/dr meliyana.png" alt="dr. Meliyana Nabila" width="430" height="auto" class="d-inline-block align-text-top">
+                    <img src="dr meliyana.png" alt="dr. Meliyana Nabila" width="430" height="auto" class="d-inline-block align-text-top">
             </div>
         </div>
     </div>
