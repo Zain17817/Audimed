@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="logo audimed.png" type="image/x-icon">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <title>Audimed - Riwayat Konsultasi</title>
-  
-<style>
+  <style>
     * {
       margin: 0;
       padding: 0;
@@ -196,13 +195,11 @@
     }
   </style>
 </head>
-
 <body>
-
   <nav class="navbar">
     <div class="container-fluid fs-5">
       <a class="navbar-brand" href="index2.html">
-        <img src="logo.png" width="140">
+        <img src="logo.png" alt="logo audimed" width="140" height="auto" class="d-inline-block align-text-top">
       </a>
 
       <ul class="nav justify-content-end">
@@ -212,20 +209,27 @@
         <li class="nav-item">
           <a class="nav-link" href="before kuesioner2.html">Konsultasi</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Tentang</a>
+        </li>                
         <li class="nav-item dropdown profile-dropdown">
-          <a class="nav-link" href="#" data-bs-toggle="dropdown">
+          <a class="nav-link profile-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <div class="profile-icon">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="Profile">
             </div>
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li class="dropdown-header">
-              <div style="color: gray;">Profil</div>
-              <div id="namaUser" class="user-name">Pengguna</div>
+              <div class="user-name" style="color: gray; font-weight: normal;">Profil</div>
+              <div class="user-name" id="namaUser">Khoirul Yani</div>
             </li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="riwayat_konsultasi.html">Riwayat Konsultasi</a></li>
-            <li><a class="dropdown-item" href="#" style="color:red;">Keluar</a></li>
+            <li><a class="dropdown-item" href="#">Pengaturan</a></li>
+            <li><a class="dropdown-item active" href="riwayat_konsultasi.html">Riwayat Konsultasi</a></li>
+            <li><a class="dropdown-item" href="#">Pusat Bantuan</a></li>
+            <li><a class="dropdown-item" href="#">Laporkan Bug</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="index.php" style="color: red;">Keluar</a></li>
           </ul>
         </li>
       </ul>
@@ -234,68 +238,129 @@
 
   <div class="container">
     <h2 class="page-title">Riwayat Konsultasi</h2>
-
-    <div id="historyContainer"></div>
+    
+    <div id="riwayatList">
+      <!-- Data riwayat akan dimuat di sini -->
+    </div>
   </div>
 
   <script>
-    // Ambil nama user dari localStorage
-    const nama = localStorage.getItem('namaPengguna');
-    if (nama) {
-      document.getElementById('namaUser').textContent = nama;
-    }
+    // Data mapping untuk pertanyaan
+    const questionTexts = {
+      1: "G01 - Apakah anda merasa gatal pada telinga?",
+      2: "G02 - Apakah telinga Anda terasa sakit, terutama saat telinga disentuh atau ditarik?",
+      3: "G03 - Apakah telinga anda mengeluarkan cairan bening?",
+      4: "G04 - Apakah keluar cairan berwarna kuning atau bening dan berbau dari telinga?",
+      5: "G05 - Apakah anda mengalami gangguan pendengaran (pendengaran menurun)?",
+      6: "G06 - Apakah telinga anda terasa penuh atau tersumbat?",
+      7: "G07 - Apakah anda merasakan demam?",
+      8: "G08 - Apakah muncul benjolan dileher atau sekitar telinga?",
+      9: "G09 - Apakah merasakan vertigo dan pusing?",
+      10: "G10 - Apakah telinga anda berdenging?",
+      11: "G11 - Apakah telinga anda merasa nyeri?",
+      12: "G12 - Apakah merasakan demam yang disertai pilek?"
+    };
 
-    // Fungsi Ambil riwayat dari database
-    async function loadHistory() {
-      try {
-        let response = await fetch("load_history.php");
-        let data = await response.json();
-
-        const container = document.getElementById("historyContainer");
-
-        if (!data.success || data.data.length === 0) {
-          container.innerHTML = `
+    // Load riwayat konsultasi
+    function loadRiwayat() {
+      fetch('get_riwayat.php')
+        .then(response => response.json())
+        .then(data => {
+          const container = document.getElementById('riwayatList');
+          
+          if (data.length === 0) {
+            container.innerHTML = `
+              <div class="empty-state">
+                <p>Belum ada riwayat konsultasi.</p>
+                <a href="before kuesioner2.html" class="btn">Mulai Konsultasi</a>
+              </div>
+            `;
+            return;
+          }
+          
+          container.innerHTML = data.map(riwayat => {
+            // Format gejala yang dipilih
+            let gejalaList = '';
+            if (riwayat.selected_symptoms) {
+              const gejalaArray = riwayat.selected_symptoms.split(',');
+              gejalaList = `
+                <div class="history-symptoms">
+                  <strong>Gejala yang dipilih:</strong>
+                  <ul>
+                    ${gejalaArray.map(gejalaId => `
+                      <li>${questionTexts[gejalaId] || `Gejala ${gejalaId}`}</li>
+                    `).join('')}
+                  </ul>
+                </div>
+              `;
+            }
+            
+            // Format tanggal
+            const consultationDate = new Date(riwayat.consultation_date);
+            const formattedDate = consultationDate.toLocaleDateString('id-ID', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            });
+            
+            return `
+              <div class="history-item">
+                <div class="history-date">
+                  ${formattedDate}
+                </div>
+                <h4>${riwayat.patient_name} (${riwayat.patient_age}) - ${riwayat.patient_gender}</h4>
+                <div class="history-diagnosis">
+                  ${riwayat.diagnosis_result}
+                </div>
+                ${gejalaList}
+                <p><strong>Solusi:</strong> ${riwayat.solution_text}</p>
+              </div>
+            `;
+          }).join('');
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          document.getElementById('riwayatList').innerHTML = `
             <div class="empty-state">
-              <p>Belum ada riwayat konsultasi.</p>
+              <p>Terjadi kesalahan saat memuat data.</p>
               <a href="before kuesioner2.html" class="btn">Mulai Konsultasi</a>
             </div>
           `;
-          return;
-        }
-
-        data.data.forEach(item => {
-          const symptomsArr = item.selected_symptoms.split(",").map(id => `<li>${id}</li>`).join("");
-
-          container.innerHTML += `
-            <div class="history-item">
-              <div class="history-date">${item.created_at}</div>
-              <div><strong>Pasien:</strong> ${item.patient_name}</div>
-              <div class="history-diagnosis">Diagnosa: ${item.diagnosis_result}</div>
-
-              <div class="history-symptoms">
-                <strong>Gejala:</strong>
-                <ul>${symptomsArr}</ul>
-              </div>
-
-              <a href="hasil2.html?riwayat=${item.id}" class="btn btn-detail">Lihat Detail</a>
-            </div>
-          `;
         });
-
-      } catch (error) {
-        console.error("Gagal memuat:", error);
-      }
     }
 
-    loadHistory();
+    function lihatDetail(id) {
+      // Arahkan ke halaman detail riwayat dengan ID tertentu
+      window.location.href = `detail_riwayat.php?id=${id}`;
+    }
 
-    // logout
-    const logoutBtn = document.querySelector('.dropdown-item[style*="red"]');
-    logoutBtn.addEventListener('click', function() {
-      localStorage.removeItem('namaPengguna');
-      window.location.href = 'index.php';
-    });
+    // Panggil saat halaman load
+    loadRiwayat();
+
+    // Otomatis mengambil nama dari login.html supaya tertera pada dropdown profile
+    // Ambil nama dari localStorage
+    const nama = localStorage.getItem('namaPengguna');
+
+    // Jika ada nama tersimpan, tampilkan di dropdown
+    if (nama) {
+      document.getElementById('namaUser').textContent = nama;
+    } else {
+      // Jika tidak ada nama tersimpan, arahkan ke halaman login
+      window.location.href = 'masuk.html';
+    }
+
+    // Tambahkan event untuk tombol keluar
+    const logoutBtn = document.querySelector('.dropdown-item[style*="color: red"]');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('namaPengguna');
+        window.location.href = 'masuk.html';
+      });
+    }
   </script>
-
 </body>
+
 </html>
