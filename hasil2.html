@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/logo audimed.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <title>Audimed - Hasil Konsultasi</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f0f7ff;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background-color: #338485;
+    }
+
+    .navbar .nav-link {
+      color: white !important;
+      font-weight: 500;
+    }
+
+    .navbar .nav-link:hover {
+      color: #ffdd57 !important;
+    }
+
+    .navbar .nav-link.active {
+      color: #ffd700;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .result-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    
+    .patient-info {
+      margin-bottom: 25px;
+    }
+    
+    .patient-info p {
+      margin-bottom: 5px;
+    }
+    
+    .solution-box {
+      background-color: #f8f9fa;
+      border-left: 4px solid #338485;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .symptoms-list {
+      margin-bottom: 25px;
+    }
+    
+    .symptoms-list ul {
+      padding-left: 20px;
+    }
+    
+    .diagnosis-box {
+      background-color: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .disclaimer-box {
+      background-color: #e7f3ff;
+      border: 1px solid #b3d9ff;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+    
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-color: #338485;
+      color: white;
+      display: inline-block;
+      text-decoration: none;
+    }
+    
+    .btn:hover {
+      background-color: #629496;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-btn {
+      background-color: #6c757d;
+      margin-right: 10px;
+    }
+    
+    .back-btn:hover {
+      background-color: #5a6268;
+    }
+
+    /* Styling untuk dropdown profile */
+        .profile-dropdown {
+            position: relative;
+        }
+        
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            color: #338485;
+            font-weight: bold;
+        }
+        
+        .user-name {
+            font-weight: bold;
+            color: #338485;
+        }
+
+        .dropdown-item {
+            padding: 10px 16px;
+            color: #333;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0;
+            overflow: hidden;
+            left: 0;
+            transform: translateX(-65%) translateY(-10px);
+            transition: all 0.3s ease;
+        }
+             
+        .dropdown-item:hover {
+            background-color: #f0f7ff;
+            color: #338485;
+        }
+        
+        .dropdown-divider {
+            margin: 0;
+        }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+        <div class="container-fluid fs-5">
+            <a class="navbar-brand" href="index2.html">
+                <img src="assets/logo.png" alt="logo audimed" width="140" height="auto" class="d-inline-block align-text-top">
+            </a>
+
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index2.html">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="before kuesioner2.html">Konsultasi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tentang</a>
+                </li>                
+                <li class="nav-item dropdown profile-dropdown">
+                    <a class="nav-link profile-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="profile-icon">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="Profile">
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="dropdown-header">
+                            <div class="user-name" style="color: gray; font-weight: normal;">Profil</div>
+                            <div class="user-name" id="namaUser">Khoirul Yani</div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Pengaturan</a></li>
+                        <li><a class="dropdown-item" href="riwayat_konsultasi.html">Riwayat Konsultasi</a></li>
+                        <li><a class="dropdown-item" href="#">Pusat Bantuan</a></li>
+                        <li><a class="dropdown-item" href="#">Laporkan Bug</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="index.php" style="color: red;">Keluar</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+  <div class="container">
+    <div class="result-card">
+      <h2 class="section-title">Hasil Konsultasi</h2>
+      
+      <div class="patient-info">
+        <h4>Data Pasien</h4>
+        <p><strong>Nama:</strong> <span id="patientName">-</span></p>
+        <p><strong>Jenis Kelamin:</strong> <span id="patientGender">-</span></p>
+        <p><strong>Usia:</strong> <span id="patientAge">-</span></p>
+      </div>
+      
+      <div class="symptoms-list">
+        <h4>Gejala yang dipilih</h4>
+        <ul id="selectedSymptoms">
+          <!-- Daftar gejala akan dimuat di sini -->
+        </ul>
+      </div>
+      
+      <div class="diagnosis-box">
+        <h4>Hasil diagnosa</h4>
+        <p id="diagnosisResult">Memuat hasil diagnosa...</p>
+      </div>
+
+    <div class="solution-box">
+        <h4>Solusi</h4>
+        <p id="solutionText">Memuat solusi...</p>
+      </div>
+      
+      <div class="disclaimer-box">
+        <p><strong>Disclaimer:</strong></p>
+        <p>Data ini hanyalah prediksi dan tidak sepenuhnya akurat, jika anda masih ragu bisa konsultasi lebih lanjut melalui tombol dibawah ini.</p>
+      </div>
+      
+      <div class="action-buttons">
+        <a href="before kuesioner2.html" class="btn back-btn">Konsultasi Lagi</a>
+        <a id="whatsapp-btn" class="btn">Konsultasi Lebih Lanjut</a>
+      </div>
+
+        <script>
+            const nomor = "6285292946635";
+            const pesan = "Halo Bu Dokter, saya ingin konsultasi lebih lanjut mengenai hasil diagnosa saya.";
+
+            // Buat tautan WhatsApp otomatis
+            const link = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
+            document.getElementById("whatsapp-btn").setAttribute("href", link);
+            document.getElementById("whatsapp-btn").setAttribute("target", "_blank");
+        </script>
+    </div>
+  </div>
+
+  <script>
+    // Data mapping untuk pertanyaan dan solusi
+    const questionTexts = {
+      1: "G01 - Apakah anda merasa gatal pada telinga?",
+      2: "G02 - Apakah telinga Anda terasa sakit, terutama saat telinga disentuh atau ditarik?",
+      3: "G03 - Apakah telinga anda mengeluarkan cairan bening?",
+      4: "G04 - Apakah keluar cairan berwarna kuning atau bening dan berbau dari telinga?",
+      5: "G05 - Apakah anda mengalami gangguan pendengaran (pendengaran menurun)?",
+      6: "G06 - Apakah telinga anda terasa penuh atau tersumbat?",
+      7: "G07 - Apakah anda merasakan demam?",
+      8: "G08 - Apakah muncul benjolan dileher atau sekitar telinga?",
+      9: "G09 - Apakah merasakan vertigo dan pusing?",
+      10: "G10 - Apakah telinga anda berdenging?",
+      11: "G11 - Apakah telinga anda merasa nyeri?",
+      12: "G12 - Apakah merasakan demam yang disertai pilek?"
+    };
+
+    const solutions = {
+      "Otitis Eksterna (Radang Telinga Luar)": "Hindari air masuk ke telinga, jangan mengorek telinga, dan gunakan obat tetes telinga yang diresepkan dokter.",
+      "Otitis Media (Infeksi Telinga Tengah)": "Konsumsi antibiotik sesuai resep dokter, kompres hangat, dan hindari mengorek telinga.",
+      "Tinnitus atau Vertigo": "Konsultasi dengan dokter THT untuk pemeriksaan lebih lanjut, hindari kebisingan, dan kelola stres.",
+      "Infeksi Saluran Napas atas yang berdampak ke telinga": "Istirahat yang cukup, minum air putih, dan konsumsi obat pereda gejala sesuai anjuran dokter.",
+      "Kolesteatoma": "Silahkan anda melakukan pembedahan untuk mengangkat kista",
+      "yang tidak terdeteksi penyakit tertentu": "Pertahankan kebersihan telinga dan hindari kebiasaan mengorek telinga."
+    };
+
+window.onload = function() {
+    // Ambil data dari URL parameter
+    const params = new URLSearchParams(window.location.search);
+    const nilai = parseInt(params.get("nilai"));
+    
+    let penyakit = params.get("penyakit");
+    let gejala = params.get("gejala");
+
+    // Pastikan gejala tidak null/undefined
+    if (!gejala || gejala.trim() === "") {
+        // Coba ambil dari localStorage sebagai backup
+        gejala = localStorage.getItem("gejalaTerpilih") || "";
+    }
+    
+    if (!penyakit) {
+        penyakit = "Tidak terdeteksi penyakit tertentu";
+    }
+
+    // Mengambil data pasien dari localStorage
+    const patientName = localStorage.getItem('patientName');
+    const patientGender = localStorage.getItem('patientGender');
+    const patientAge = localStorage.getItem('patientAge');
+    
+    // Menampilkan data pasien
+    document.getElementById('patientName').textContent = patientName || '-';
+    document.getElementById('patientGender').textContent = patientGender || '-';
+    document.getElementById('patientAge').textContent = patientAge || '-';
+    
+    // Menampilkan gejala yang dipilih
+    const selectedSymptomsList = document.getElementById('selectedSymptoms');
+    if (gejala && gejala.trim() !== "") {
+        const gejalaArray = gejala.split(',');
+        gejalaArray.forEach(gejalaId => {
+            const li = document.createElement('li');
+            li.textContent = questionTexts[gejalaId] || `Gejala ${gejalaId}`;
+            selectedSymptomsList.appendChild(li);
+        });
+    } else {
+        selectedSymptomsList.innerHTML = '<li>Tidak ada gejala yang dipilih</li>';
+    }
+    
+    // Menampilkan hasil diagnosa
+    document.getElementById('diagnosisResult').textContent = `Anda menderita penyakit ${penyakit}`;
+    
+    // Menampilkan solusi berdasarkan penyakit
+    document.getElementById('solutionText').textContent = solutions[penyakit] || "Konsultasikan dengan dokter THT untuk penanganan lebih lanjut.";
+
+    // Simpan data ke database
+    saveConsultationToDatabase();
+};
+
+function saveConsultationToDatabase() {
+    const params = new URLSearchParams(window.location.search);
+    const nilai = parseInt(params.get("nilai"));
+    let penyakit = params.get("penyakit") || "Tidak terdeteksi penyakit tertentu";
+    let gejala = params.get("gejala") || "";
+
+    // Jika gejala masih kosong, coba ambil dari localStorage
+    if (!gejala || gejala.trim() === "") {
+        gejala = localStorage.getItem("gejalaTerpilih") || "";
+    }
+
+    // Mengambil data dari localStorage
+    const patientName = localStorage.getItem('patientName');
+    const patientGender = localStorage.getItem('patientGender');
+    const patientAge = localStorage.getItem('patientAge');
+
+    // Validasi data
+    if (!patientName || !patientGender || !patientAge) {
+        console.error('Data pasien tidak lengkap');
+        return;
+    }
+
+    // Mengirim data ke server
+    const formData = new FormData();
+    formData.append('patientName', patientName);
+    formData.append('patientGender', patientGender);
+    formData.append('patientAge', patientAge);
+    formData.append('gejala', gejala);
+    formData.append('penyakit', penyakit);
+    formData.append('nilai', nilai);
+
+    fetch('save_consultation.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Data konsultasi tersimpan di database');
+            // Hapus data sementara setelah berhasil disimpan
+            localStorage.removeItem("gejalaTerpilih");
+        } else {
+            console.error('Gagal menyimpan data:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+    }
+
+    // Otomatis mengambil nama dari login.html supaya tertera pada dropdown profile
+    // Ambil nama dari localStorage
+    const nama = localStorage.getItem('namaPengguna');
+
+    // Jika ada nama tersimpan, tampilkan di dropdown
+    if (nama) {
+        document.getElementById('namaUser').textContent = nama;
+    } else {
+        // Jika tidak ada nama tersimpan, arahkan ke halaman login
+        window.location.href = 'masuk.html';
+    }
+
+    // Tambahkan event untuk tombol keluar (opsional)
+    const logoutBtn = document.querySelector('.dropdown-item[style*="color: red"]');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('namaPengguna');
+                window.location.href = 'index.php';
+            });
+        }
+  </script>
+</body>
+</html>

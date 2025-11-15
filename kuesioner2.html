@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/logo audimed.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Audimed - Konsultasi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7ff;
+        }
+
+        .navbar {
+        background-color: #338485;
+        }
+
+        .navbar .nav-link {
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .navbar .nav-link:hover {
+            color: #ffdd57 !important;
+        }
+
+        .navbar .nav-link.active {
+            color: #ffd700;
+        }        
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .consultation-form {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+         .consultation-form p{
+            font-size: 20px;
+         }
+        
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+        }
+        
+        .question-text {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .options {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .option input[type="radio"] {
+            display: none;
+        }
+        
+        .custom-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.3s;
+        }
+        
+        .custom-radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #338485;
+            display: none;
+        }
+
+        .option span{
+            font-size: 20px;
+            color: #333;
+        }
+        
+        .option input[type="radio"]:checked + .custom-radio {
+            border-color: #338485;
+        }
+        
+        .option input[type="radio"]:checked + .custom-radio::after {
+            display: block;
+        }
+        
+        .btn {
+            display: block;
+            margin: 0 auto;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease; /* efek halus */
+            background-color: #338485;
+            color: white;
+        }
+        
+        .btn:hover {
+            background-color: #629496;
+            color: white;
+            transform: translateY(-2px); /* sedikit naik */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* beri bayangan */
+        }
+        
+        @media (max-width: 600px) {
+            .options {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+
+        /* Styling untuk dropdown profile */
+        .profile-dropdown {
+            position: relative;
+        }
+        
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            color: #338485;
+            font-weight: bold;
+        }
+        
+        .user-name {
+            font-weight: bold;
+            color: #338485;
+        }
+
+        .dropdown-item {
+            padding: 10px 16px;
+            color: #333;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0;
+            overflow: hidden;
+            left: 0;
+            transform: translateX(-65%) translateY(-10px);
+            transition: all 0.3s ease; /* animasi halus */
+        }
+             
+        .dropdown-item:hover {
+            background-color: #f0f7ff;
+            color: #338485;
+        }
+        
+        .dropdown-divider {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid fs-5">
+            <a class="navbar-brand" href="index2.html">
+                <img src="assets/logo.png" alt="logo audimed" width="140" height="auto" class="d-inline-block align-text-top">
+            </a>
+
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index2.html">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="before kuesioner2.html">Konsultasi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tentang</a>
+                </li>                
+                <li class="nav-item dropdown profile-dropdown">
+                    <a class="nav-link profile-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="profile-icon">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="Profile">
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="dropdown-header">
+                            <div class="user-name" style="color: gray; font-weight: normal;">Profil</div>
+                            <div class="user-name" id="namaUser">Khoirul Yani</div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Pengaturan</a></li>
+                        <li><a class="dropdown-item" href="#">Riwayat Konsultasi</a></li>
+                        <li><a class="dropdown-item" href="#">Pusat Bantuan</a></li>
+                        <li><a class="dropdown-item" href="#">Laporkan Bug</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="index.php" style="color: red;">Keluar</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="consultation-form">
+            <h2>Konsultasi</h2>
+            <p>Pastikan isi kuesioner di bawah ini sesuai dengan yang dirasakan!</p>
+            <hr>
+            
+            <form id="consultationForm">
+                <div class="question">
+                    <div class="question-text">1. Apakah anda merasa gatal pada telinga?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question1" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question1" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">2. Apakah telinga Anda terasa sakit, terutama saat telinga disentuh atau ditarik?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question2" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question2" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">3. Apakah telinga anda mengeluarkan cairan bening?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question3" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question3" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">4. Apakah keluar cairan berwarna kuning atau bening dan berbau dari telinga?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question4" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question4" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">5. Apakah anda mengalami gangguan pendengaran (pendengaran menurun)?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question5" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question5" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">6. Apakah telinga anda terasa penuh atau tersumbat?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question6" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question6" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">7. Apakah anda merasakan demam?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question7" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question7" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">8. Apakah muncul benjolan dileher atau sekitar telinga?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question8" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question8" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">9. Apakah merasakan vertigo dan pusing?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question9" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question9" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">10. Apakah telinga anda berdenging?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question10" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question10" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">11. Apakah telinga anda merasa nyeri?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question11" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question11" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">12. Apakah merasakan demam yang disertai pilek?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="question12" value="ya">
+                            <span class="custom-radio"></span>
+                            <span>Ya</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="question12" value="tidak">
+                            <span class="custom-radio"></span>
+                            <span>Tidak</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn" onclick="hitungKonsultasi()">Lihat Hasil</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Ambil nama dari localStorage
+        const nama = localStorage.getItem('namaPengguna');
+
+        // Jika ada nama tersimpan, tampilkan di dropdown
+        if (nama) {
+            document.getElementById('namaUser').textContent = nama;
+        } else {
+            // Jika tidak ada nama tersimpan, arahkan ke halaman login
+            window.location.href = 'masuk.html';
+        }
+
+    function hitungKonsultasi() {
+    const jumlahPertanyaan = 12;
+    let total = 0;
+    let gejalaTerpilih = [];
+
+    // Loop semua pertanyaan
+    for (let i = 1; i <= jumlahPertanyaan; i++) {
+        let jawaban = document.querySelector(`input[name="question${i}"]:checked`);
+        if (!jawaban) {
+            alert(`Harap jawab pertanyaan nomor ${i} terlebih dahulu.`);
+            return;
+        }
+        if (jawaban.value === "ya") {
+            total++;
+            gejalaTerpilih.push(i);
+        }
+    }
+
+    // Tentukan diagnosis berdasarkan pola gejala
+    let penyakit = "yang tidak terdeteksi penyakit tertentu";
+
+    // Contoh aturan diagnosis:
+    if (gejalaTerpilih.includes(1) && gejalaTerpilih.includes(3) && gejalaTerpilih.includes(6)) {
+        penyakit = "Otitis Eksterna (Radang Telinga Luar)";
+    } 
+    else if (gejalaTerpilih.includes(4) && gejalaTerpilih.includes(5) && gejalaTerpilih.includes(7)) {
+        penyakit = "Otitis Media (Infeksi Telinga Tengah)";
+    } 
+    else if (gejalaTerpilih.includes(9) && gejalaTerpilih.includes(10)) {
+        penyakit = "Tinnitus atau Vertigo";
+    } 
+    else if (gejalaTerpilih.includes(11) && gejalaTerpilih.includes(12)) {
+        penyakit = "Infeksi Saluran Napas atas yang berdampak ke telinga";
+    }
+
+    // Simpan gejala ke localStorage untuk backup
+    localStorage.setItem("gejalaTerpilih", gejalaTerpilih.join(','));
+
+    // Kirim ke hasil.html dengan parameter gejala
+    const url = "hasil2.html?nilai=" + encodeURIComponent(total) + 
+                "&penyakit=" + encodeURIComponent(penyakit) + 
+                "&gejala=" + encodeURIComponent(gejalaTerpilih.join(','));
+    window.location.href = url;
+    }
+    </script>
+</body>
+</html>

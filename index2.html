@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/logo audimed.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Audimed - Beranda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7ff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+        background-color: #338485;
+        }
+
+        .navbar .nav-link {
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .navbar .nav-link:hover {
+            color: #ffdd57 !important;
+        }
+
+        .navbar .nav-link.active {
+            color: #ffd700;
+        }
+        
+        .container {
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease; /* efek halus */
+        }
+        
+        .btn-login {
+            background-color: transparent;
+            color: #338485;
+            border: 2px solid #338485;
+        }
+        
+        .btn-consult {
+            background-color: #338485;
+            color: white;
+        }
+        
+        .btn-login:hover {
+            background-color: #338485;
+            color: white;
+            transform: translateY(-2px); /* sedikit naik */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* beri bayangan */
+        }
+        
+        .btn-consult:hover {
+            background-color: #629496;
+            color: white;
+            transform: translateY(-2px); /* sedikit naik */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* beri bayangan */
+        }
+        
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin: 50px 0;
+            gap: 40px;
+        }
+        
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .hero-content h1 {
+            font-size: 42px;
+            color: #338485;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Styling untuk dropdown profile */
+        .profile-dropdown {
+            position: relative;
+        }
+        
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            color: #338485;
+            font-weight: bold;
+        }
+        
+        .user-name {
+            font-weight: bold;
+            color: #338485;
+        }
+
+        .dropdown-item {
+            padding: 10px 16px;
+            color: #333;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0;
+            overflow: hidden;
+            left: 0;
+            transform: translateX(-65%) translateY(-10px);
+            transition: all 0.3s ease; /* animasi halus */
+        }
+             
+        .dropdown-item:hover {
+            background-color: #f0f7ff;
+            color: #338485;
+        }
+        
+        .dropdown-divider {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid fs-5">
+            <a class="navbar-brand" href="index2.html">
+                <img src="assets/logo.png" alt="logo audimed" width="140" height="auto" class="d-inline-block align-text-top">
+            </a>
+
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index2.html">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="before kuesioner2.html">Konsultasi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tentang</a>
+                </li>                
+                <li class="nav-item dropdown profile-dropdown">
+                    <a class="nav-link profile-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="profile-icon">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="Profile">
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="dropdown-header">
+                            <div class="user-name" style="color: gray; font-weight: normal;">Profil</div>
+                            <div class="user-name" id="namaUser">Khoirul Yani</div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Pengaturan</a></li>
+                        <li><a class="dropdown-item" href="riwayat_konsultasi.html">Riwayat Konsultasi</a></li>
+                        <li><a class="dropdown-item" href="#">Pusat Bantuan</a></li>
+                        <li><a class="dropdown-item" href="#">Laporkan Bug</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="index.php" style="color: red;">Keluar</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Selamat datang di Audimed</h1>
+                <p><strong>Konsultasi cepat dengan dokter THT, solusi tepat untuk telinga sehat.</strong></p>
+                <p>Audimed, platform konsultasi kesehatan telinga akurat dan terpercaya. Dapatkan informasi terpercaya konsultasi mudah, solusi tepat dan kapan saja dalam menjaga kesehatan pendengaran Anda.</p>
+                
+                <div class="nav-buttons" style="justify-content: left; ">
+                    <button class="btn btn-consult" style="font-size: 20px;" onclick="window.location.href='before kuesioner2.html'">Konsultasi</button>
+                </div>
+            </div>
+            
+            
+            <div class="hero-image">
+                    <img src="assets/dr meliyana.png" alt="dr. Meliyana Nabila" width="430" height="auto" class="d-inline-block align-text-top">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Ambil nama dari localStorage
+        const nama = localStorage.getItem('namaPengguna');
+
+        // Jika ada nama tersimpan, tampilkan di dropdown
+        if (nama) {
+            document.getElementById('namaUser').textContent = nama;
+        } else {
+            // Jika tidak ada nama tersimpan, arahkan ke halaman login
+            window.location.href = 'masuk.html';
+        }
+
+        // Tambahkan event untuk tombol keluar (opsional)
+        const logoutBtn = document.querySelector('.dropdown-item[style*="color: red"]');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('namaPengguna');
+                window.location.href = 'index.php';
+            });
+        }
+    </script>
+</body>
+</html>

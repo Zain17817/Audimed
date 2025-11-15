@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/logo audimed.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Audimed - Data Pasien</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7ff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+        background-color: #338485;
+        }
+
+        .navbar .nav-link {
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .navbar .nav-link:hover {
+            color: #ffdd57 !important;
+        }
+
+        .navbar .nav-link.active {
+            color: #ffd700;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            color: #338485;
+            font-size: 28px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #338485;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .patient-form {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #338485;
+            outline: none;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease; /* efek halus */
+            background-color: #338485;
+            color: white;
+            float: right;
+        }
+        
+        .btn:hover {
+            background-color: #629496;
+            color: white;
+            transform: translateY(-2px); /* sedikit naik */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* beri bayangan */
+        }
+        
+        
+        @media (max-width: 600px) {
+            .navigation {
+                flex-direction: column;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid fs-5">
+            <a class="navbar-brand" href="index.php">
+                <img src="assets/logo.png" alt="logo audimed" width="140" height="auto" class="d-inline-block align-text-top">
+            </a>
+
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.php">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="before kuesioner.html">Konsultasi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tentang</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-title">Data Pasien</div>
+        <div class="patient-form">
+            <form id="patientForm">
+                <div class="form-group">
+                    <p style="text-align: center; font-size: 24px; font-weight: bold;">Silahkan isi data pasien terlebih dahulu</p>
+                    <label for="nama">Nama Pasien</label>
+                    <input type="text" id="nama" name="nama" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="jenisKelamin">Jenis Kelamin</label>
+                    <select id="jenisKelamin" name="jenisKelamin" required>
+                        <option value="">Pilih Jenis Kelamin</option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="usia">Usia</label>
+                    <input type="text" id="usia" name="usia" required>
+                </div>
+                
+                <button type="submit" class="btn">Lanjut</button>
+                <div style="clear: both;"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('patientForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simpan data pasien ke localStorage
+        const nama = document.getElementById('nama').value;
+        const jenisKelamin = document.getElementById('jenisKelamin').value;
+        const usia = document.getElementById('usia').value;
+        
+        localStorage.setItem('patientName', nama);
+        localStorage.setItem('patientGender', jenisKelamin);
+        localStorage.setItem('patientAge', usia);
+        
+        // Redirect ke kuesioner
+        window.location.href = 'kuesioner.html';
+        });
+    </script>
+</body>
+</html>

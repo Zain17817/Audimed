@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/logo audimed.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Audimed - Hasil Konsultasi</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f0f7ff;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background-color: #338485;
+    }
+
+    .navbar .nav-link {
+      color: white !important;
+      font-weight: 500;
+    }
+
+    .navbar .nav-link:hover {
+      color: #ffdd57 !important;
+    }
+
+    .navbar .nav-link.active {
+      color: #ffd700;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .result-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    
+    .patient-info {
+      margin-bottom: 25px;
+    }
+    
+    .patient-info p {
+      margin-bottom: 5px;
+    }
+    
+    .solution-box {
+      background-color: #f8f9fa;
+      border-left: 4px solid #338485;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .symptoms-list {
+      margin-bottom: 25px;
+    }
+    
+    .symptoms-list ul {
+      padding-left: 20px;
+    }
+    
+    .diagnosis-box {
+      background-color: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .disclaimer-box {
+      background-color: #e7f3ff;
+      border: 1px solid #b3d9ff;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+    
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-color: #338485;
+      color: white;
+      display: inline-block;
+      text-decoration: none;
+    }
+    
+    .btn:hover {
+      background-color: #629496;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-btn {
+      background-color: #6c757d;
+      margin-right: 10px;
+    }
+    
+    .back-btn:hover {
+      background-color: #5a6268;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container-fluid fs-5">
+      <a class="navbar-brand" href="index.php">
+        <img src="assets/logo.png" alt="logo audimed" width="140" height="auto" class="d-inline-block align-text-top">
+      </a>
+
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link" href="index.php">Beranda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="before kuesioner.html">Konsultasi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Tentang</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="result-card">
+      <h2 class="section-title">Hasil Konsultasi</h2>
+      
+      <div class="patient-info">
+        <h4>Data Pasien</h4>
+        <p><strong>Nama:</strong> <span id="patientName">-</span></p>
+        <p><strong>Jenis Kelamin:</strong> <span id="patientGender">-</span></p>
+        <p><strong>Usia:</strong> <span id="patientAge">-</span></p>
+      </div>
+      
+      <div class="symptoms-list">
+        <h4>Gejala yang dipilih</h4>
+        <ul id="selectedSymptoms">
+          <!-- Daftar gejala akan dimuat di sini -->
+        </ul>
+      </div>
+      
+      <div class="diagnosis-box">
+        <h4>Hasil diagnosa</h4>
+        <p id="diagnosisResult">Memuat hasil diagnosa...</p>
+      </div>
+
+      <div class="solution-box">
+        <h4>Solusi</h4>
+        <p id="solutionText">Memuat solusi...</p>
+      </div>
+      
+      <div class="disclaimer-box">
+        <p><strong>Disclaimer:</strong></p>
+        <p>Data ini hanyalah prediksi dan tidak sepenuhnya akurat, jika anda masih ragu bisa konsultasi lebih lanjut ke pakarnya.</p>
+      </div>
+      
+      <div class="action-buttons">
+        <a href="before kuesioner.html" class="btn back-btn">Kembali</a>
+        <a href="kuesioner.html" class="btn">Konsultasi Lagi</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data mapping untuk pertanyaan dan solusi
+    const questionTexts = {
+      1: "G01 - Apakah anda merasa gatal pada telinga?",
+      2: "G02 - Apakah telinga Anda terasa sakit, terutama saat telinga disentuh atau ditarik?",
+      3: "G03 - Apakah telinga anda mengeluarkan cairan bening?",
+      4: "G04 - Apakah keluar cairan berwarna kuning atau bening dan berbau dari telinga?",
+      5: "G05 - Apakah anda mengalami gangguan pendengaran (pendengaran menurun)?",
+      6: "G06 - Apakah telinga anda terasa penuh atau tersumbat?",
+      7: "G07 - Apakah anda merasakan demam?",
+      8: "G08 - Apakah muncul benjolan dileher atau sekitar telinga?",
+      9: "G09 - Apakah merasakan vertigo dan pusing?",
+      10: "G10 - Apakah telinga anda berdenging?",
+      11: "G11 - Apakah telinga anda merasa nyeri?",
+      12: "G12 - Apakah merasakan demam yang disertai pilek?"
+    };
+
+    const solutions = {
+      "Otitis Eksterna (Radang Telinga Luar)": "Hindari air masuk ke telinga, jangan mengorek telinga, dan gunakan obat tetes telinga yang diresepkan dokter.",
+      "Otitis Media (Infeksi Telinga Tengah)": "Konsumsi antibiotik sesuai resep dokter, kompres hangat, dan hindari mengorek telinga.",
+      "Tinnitus atau Vertigo": "Konsultasi dengan dokter THT untuk pemeriksaan lebih lanjut, hindari kebisingan, dan kelola stres.",
+      "Infeksi Saluran Napas atas yang berdampak ke telinga": "Istirahat yang cukup, minum air putih, dan konsumsi obat pereda gejala sesuai anjuran dokter.",
+      "Kolesteatoma": "Silahkan anda melakukan pembedahan untuk mengangkat kista",
+      "yang tidak terdeteksi oleh sistem kami": "Pertahankan kebersihan telinga dan hindari kebiasaan mengorek telinga."
+    };
+
+    window.onload = function() {
+      // Ambil data dari URL parameter
+      const params = new URLSearchParams(window.location.search);
+      const nilai = parseInt(params.get("nilai"));
+      const penyakit = params.get("penyakit") || "yang tidak terdeteksi oleh sistem kami";
+      const gejala = params.get("gejala") || "";
+      
+      // Ambil data pasien dari localStorage (disimpan di before kuesioner2.html)
+      const patientName = localStorage.getItem('patientName') || 'Yanto';
+      const patientGender = localStorage.getItem('patientGender') || 'Laki-laki';
+      const patientAge = localStorage.getItem('patientAge') || '21 Tahun';
+      
+      // Tampilkan data pasien
+      document.getElementById('patientName').textContent = patientName;
+      document.getElementById('patientGender').textContent = patientGender;
+      document.getElementById('patientAge').textContent = patientAge;
+      
+      // Tampilkan gejala yang dipilih
+      const selectedSymptomsList = document.getElementById('selectedSymptoms');
+      if (gejala) {
+        const gejalaArray = gejala.split(',');
+        gejalaArray.forEach(gejalaId => {
+          const li = document.createElement('li');
+          li.textContent = questionTexts[gejalaId] || `Gejala ${gejalaId}`;
+          selectedSymptomsList.appendChild(li);
+        });
+      } else {
+        selectedSymptomsList.innerHTML = '<li>Tidak ada gejala yang dipilih</li>';
+      }
+      
+      // Tampilkan hasil diagnosa
+      document.getElementById('diagnosisResult').textContent = `Anda menderita penyakit ${penyakit}`;
+      
+      // Tampilkan solusi berdasarkan penyakit
+      document.getElementById('solutionText').textContent = solutions[penyakit] || "Konsultasikan dengan dokter THT untuk penanganan lebih lanjut.";
+    };
+  </script>
+</body>
+</html>
