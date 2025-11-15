@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Untuk testing, hardcode user_id = 1
     // Dalam implementasi nyata, gunakan session user_id
-    $userId = 1;
+    $userId;
     
     if ($userId) {
         try {
@@ -57,4 +57,5 @@ function getSolutionText($penyakit) {
     
     return $solutions[$penyakit] ?? "Konsultasikan dengan dokter THT untuk penanganan lebih lanjut.";
 }
+
 ?>
