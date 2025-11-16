@@ -295,22 +295,8 @@
               `;
             }
             
-            // Format tanggal
-            const consultationDate = new Date(riwayat.consultation_date);
-            const formattedDate = consultationDate.toLocaleDateString('id-ID', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
-            });
-            
             return `
               <div class="history-item">
-                <div class="history-date">
-                  ${formattedDate}
-                </div>
                 <h4>${riwayat.patient_name} (${riwayat.patient_age}) - ${riwayat.patient_gender}</h4>
                 <div class="history-diagnosis">
                   ${riwayat.diagnosis_result}
@@ -364,3 +350,4 @@
 </body>
 
 </html>
+
