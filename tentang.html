@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audimed - Tentang</title>
+    <link rel="shortcut icon" href="logo audimed.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+        background-color: #338485;
+        }
+
+        .navbar .nav-link {
+        color: white !important;
+        font-weight: 500;
+        }
+
+        .navbar .nav-link:hover {
+        color: #ffdd57 !important;
+        }
+
+        .navbar .nav-link.active {
+        color: #ffd700;
+        }        
+
+        header h2 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+            
+        .content-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 850px;
+
+      /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-bottom: 30px; */
+        }
+        
+        .content-title {
+            color: #338485;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .content-subtitle {
+            color: #338485;
+            margin: 25px 0 15px;
+            font-size: 1.3rem;
+        }
+        
+        .content-text {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .team-member {
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #e3f2fd;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .member-info h3 {
+            font-size: 1.2rem;
+            color: #338485;
+            margin-bottom: 5px;
+        }
+        
+        .member-info p {
+            color: #666;
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background-color: #338485;
+            color: white;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #338485;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        @media (max-width: 480px) {            
+            .content-card {
+                padding: 20px;
+            }
+        }
+
+/* Styling untuk dropdown profile */
+        .profile-dropdown {
+            position: relative;
+        }
+        
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            color: #338485;
+            font-weight: bold;
+        }
+        
+        .user-name {
+            font-weight: bold;
+            color: #338485;
+        }
+
+        .dropdown-item {
+            padding: 10px 16px;
+            color: #333;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0;
+            overflow: hidden;
+            left: 0;
+            transform: translateX(-65%) translateY(-10px);
+            transition: all 0.3s ease;
+        }
+             
+        .dropdown-item:hover {
+            background-color: #f0f7ff;
+            color: #338485;
+        }
+        
+        .dropdown-divider {
+            margin: 0;
+        }        
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid fs-5">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo.png" alt="logo audimed" width="140" height="auto" class="d-inline-block align-text-top">
+            </a>
+
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="before kuesioner.html">Konsultasi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tentang</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <div class="content-card">
+            <h2 class="content-title">Tentang Audimed</h2>
+            <p class="content-text">
+                Audimed adalah website konsultasi kesehatan pendengaran yang memudahkan pencatatan data pasien, riwayat konsultasi, dan pengelolaan layanan klinik. Sistem ini dibuat untuk meningkatkan efisiensi, mempercepat akses informasi, dan menghadirkan proses layanan yang lebih rapi, modern, dan terintegrasi.
+            </p>
+            
+            <h3 class="content-subtitle">Tim Developer Kami</h3>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="assets/meliyana.png" alt="Dr. Meliyana Nabila">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Meliyana Nabila</h3>
+                        <p>Spesialis THT</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="assets/ishlah.png" alt="Ahmad Zainul Ishlah">
+                    </div>
+                    <div class="member-info">
+                        <h3>Ahmad Zainul Ishlah</h3>
+                        <p>Programmer</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="assets/izzat.png" alt="Izzat Khalwani">
+                    </div>
+                    <div class="member-info">
+                        <h3>Izzat Khalwani</h3>
+                        <p>UI Designer</p>
+                    </div>
+                </div>
+                                <div class="team-member">
+                    <div class="member-image">
+                        <img src="assets/yani.jpg" alt="Izzat Khalwani">
+                    </div>
+                    <div class="member-info">
+                        <h3>M. Khoirul Yani</h3>
+                        <p>Tester</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-container">
+                <a href="index.html" class="btn">Kembali ke Beranda</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
