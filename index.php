@@ -135,7 +135,7 @@
 <body>
     <nav class="navbar">
         <div class="container-fluid fs-5">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index.php">
                 <img src="logo.png" alt="logo audimed" width="140" height="auto" class="d-inline-block align-text-top">
             </a>
 
