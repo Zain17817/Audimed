@@ -1,9 +1,9 @@
 <?php
 $host = 'db.fr-pari1.bengt.wasmernet.com';
-$dbname = 'database_audimed';
+$dbname = 'niki_db';
 $port = '10272';
-$username = 'db4fe2b374088000a57752466248';
-$password = '0691db4f-e2b3-7549-8000-d6dae71c07dd';
+$username = 'e4aff1c07c1d8000ba67608f5cf1';
+$password = '0691e4af-f1c0-7e00-8000-181e95479614';
 
 try {
     $pdo = new PDO(
@@ -19,5 +19,6 @@ try {
     die("Koneksi database gagal: " . $e->getMessage());
 }
 ?>
+
 
 
